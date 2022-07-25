@@ -11,7 +11,7 @@ const List = ({ places }) => {
 
     return (
         <div className={classes.container}>
-            <Typography variant="h5">
+            <Typography variant="h4">
                 Where are you heading to?
             </Typography>
             <FormControl className={classes.formControl}>
