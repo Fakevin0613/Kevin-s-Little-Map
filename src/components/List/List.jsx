@@ -1,20 +1,34 @@
 import React from 'react';
 import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, Select } from '@material-ui/core'
 import PlaceDetails from '../PlaceDetails/PlaceDetails'
-import { useState } from 'react';
+import { useState, useEffect, createRef} from 'react';
 import useStyle from './styles';
 
-const List = ({ places }) => {
+const List = ({ places, childClick, isLoading}) => {
     const classes = useStyle();
     const [type, setType] = useState('restaurant');
     const [rating, setRating] = useState('0');
+    const [elRefs, setElRefs] = useState([]);
+
+    useEffect(() => {
+        const refs = Array(places?.length).fill().map((_, i) => elRefs[i] || createRef());
+        setElRefs(refs)
+        console.log({elRefs})
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [places]);
 
     return (
         <div className={classes.container}>
             <Typography variant="h4">
                 Where are you heading to?
-            </Typography>
-            <FormControl className={classes.formControl}>
+                </Typography>
+            {isLoading? (
+                <div className={classes.loading}>
+                    <CircularProgress size = "6rem"></CircularProgress>
+                </div>
+            ) : (
+                <>
+                <FormControl className={classes.formControl}>
                 <InputLabel>What you are looking for?</InputLabel>
                 <Select value={type} onChange={(e) => setType(e.target.value)}>
                     <MenuItem value="restaurant">Restaurant</MenuItem>
@@ -36,13 +50,16 @@ const List = ({ places }) => {
 
             <Grid container spacing = {3} className={classes.list}>
                 {places?.map((place ,i) => (
-                    <Grid item key = {i} xs={12}>
-                        <PlaceDetails place = {place} />
-                    </Grid>
+                    place.name? (
+                        <Grid item key = {i} xs={12}>
+                            <PlaceDetails place = {place} selected={Number(childClick) === i} refProp = {elRefs[i]}/>
+                        </Grid> 
+                    ) : null
                 ))}
             </Grid>
+                </>
+            )}
         </div>
-
     )
 }
 
