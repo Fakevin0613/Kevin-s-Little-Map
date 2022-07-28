@@ -10,12 +10,13 @@ const List = ({ places, childClick, isLoading}) => {
     const [rating, setRating] = useState('0');
     const [elRefs, setElRefs] = useState([]);
 
+    console.log({childClick})
+
     useEffect(() => {
         const refs = Array(places?.length).fill().map((_, i) => elRefs[i] || createRef());
         setElRefs(refs)
         console.log({elRefs})
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [places]);
+    }, [places]);
 
     return (
         <div className={classes.container}>
@@ -52,7 +53,7 @@ const List = ({ places, childClick, isLoading}) => {
                 {places?.map((place ,i) => (
                     place.name? (
                         <Grid item key = {i} xs={12}>
-                            <PlaceDetails place = {place} selected={Number(childClick) === i} refProp = {elRefs[i]}/>
+                            <PlaceDetails place = {place} selected = {Number(childClick) === i} refProp = {elRefs[i]} />    
                         </Grid> 
                     ) : null
                 ))}
