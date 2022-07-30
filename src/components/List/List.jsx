@@ -13,6 +13,7 @@ const List = ({ places, childClick, isLoading}) => {
     console.log({childClick})
 
     useEffect(() => {
+        console.log(places)
         const refs = Array(places?.length).fill().map((_, i) => elRefs[i] || createRef());
         setElRefs(refs)
         console.log({elRefs})
@@ -20,16 +21,17 @@ const List = ({ places, childClick, isLoading}) => {
 
     return (
         <div className={classes.container}>
-            <Typography variant="h4">
-                Where are you heading to?
-                </Typography>
             {isLoading? (
                 <div className={classes.loading}>
                     <CircularProgress size = "6rem"></CircularProgress>
                 </div>
             ) : (
-                <>
-                <FormControl className={classes.formControl}>
+            <>
+            <div className={classes.topBar}>
+            <Typography variant="h4">
+                Where are you heading to?
+            </Typography>
+            <FormControl className={classes.formControl}>
                 <InputLabel>What you are looking for?</InputLabel>
                 <Select value={type} onChange={(e) => setType(e.target.value)}>
                     <MenuItem value="restaurant">Restaurant</MenuItem>
@@ -48,17 +50,18 @@ const List = ({ places, childClick, isLoading}) => {
                     <MenuItem value="4.5">Rating above 4.5</MenuItem>
                 </Select>
             </FormControl>
+            </div>
 
             <Grid container spacing = {3} className={classes.list}>
                 {places?.map((place ,i) => (
                     place.name? (
-                        <Grid item key = {i} xs={12}>
+                        <Grid ref = {elRefs[i]} item key = {i} xs={12}>
                             <PlaceDetails place = {place} selected = {Number(childClick) === i} refProp = {elRefs[i]} />    
                         </Grid> 
                     ) : null
                 ))}
             </Grid>
-                </>
+            </>
             )}
         </div>
     )

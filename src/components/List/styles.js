@@ -8,15 +8,17 @@ export default makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   loading: {
-    height: '600px', display: 'flex', justifyContent: 'center', alignItems: 'center',
+    height: '500px', display: 'flex', justifyContent: 'center', alignItems: 'center',
   },
   container: {
     padding: '25px',
-  },
-  marginBottom: {
-    marginBottom: '30px',
+    height: '99vh',
   },
   list: {
-    height: '80vh', overflow: 'auto',
+    overflow: 'auto',
+    height: '77vh',
   },
+  topBar: {
+    height: '20vh',
+  }
 }));
