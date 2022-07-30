@@ -9,12 +9,15 @@ import Map from './components/Map/Map';
 
 
 const App = () => {
-    const [coordinates, setCoordinates] = useState();
+    const [coordinates, setCoordinates] = useState({});
     const [bounds, setBounds] = useState({});
-    const [childClick, setChildClick] = useState(null)
+    const [childClick, setChildClick] = useState(null);
 
     const [places, setPlaces] = useState([]);
     const [isloading, setIsloading] = useState(false);
+
+    const [type, setType] = useState('restaurants');
+    const [rating, setRating] = useState('0');
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
@@ -24,13 +27,13 @@ const App = () => {
 
     useEffect(() => {
         setIsloading(true)
-        getPlacesData(bounds.sw, bounds.ne)
+        getPlacesData(type, bounds.sw, bounds.ne)
             .then((data) => {
                 setPlaces(data);
                 setIsloading(false)
             }
-        )
-    }, [coordinates, bounds]);
+            )
+    }, [coordinates, bounds, type]);
 
     return (
         <>
@@ -38,7 +41,15 @@ const App = () => {
             <Header />
             <Grid container spacing={3} style={{ width: '100%' }}>
                 <Grid item xs={12} md={4}>
-                    <List places={places} childClick = {childClick} isLoading = {isloading}/>
+                    <List 
+                        places={places} 
+                        childClick={childClick} 
+                        isLoading={isloading} 
+                        type={type}
+                        rating={rating}
+                        setType={setType}
+                        setRating={setRating}
+                    />
                 </Grid>
                 <Grid item xs={12} md={8}>
                     <Map
@@ -46,7 +57,7 @@ const App = () => {
                         setBounds={setBounds}
                         coordinates={coordinates}
                         places={places}
-                        setChildClicked = {setChildClick}
+                        setChildClicked={setChildClick}
                     />
                 </Grid>
             </Grid>

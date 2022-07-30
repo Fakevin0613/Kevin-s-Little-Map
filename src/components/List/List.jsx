@@ -4,19 +4,13 @@ import PlaceDetails from '../PlaceDetails/PlaceDetails'
 import { useState, useEffect, createRef} from 'react';
 import useStyle from './styles';
 
-const List = ({ places, childClick, isLoading}) => {
+const List = ({ places, childClick, isLoading, type, rating, setType, setRating}) => {
     const classes = useStyle();
-    const [type, setType] = useState('restaurant');
-    const [rating, setRating] = useState('0');
     const [elRefs, setElRefs] = useState([]);
 
-    console.log({childClick})
-
     useEffect(() => {
-        console.log(places)
         const refs = Array(places?.length).fill().map((_, i) => elRefs[i] || createRef());
         setElRefs(refs)
-        console.log({elRefs})
     }, [places]);
 
     return (
@@ -34,9 +28,9 @@ const List = ({ places, childClick, isLoading}) => {
             <FormControl className={classes.formControl}>
                 <InputLabel>What you are looking for?</InputLabel>
                 <Select value={type} onChange={(e) => setType(e.target.value)}>
-                    <MenuItem value="restaurant">Restaurant</MenuItem>
-                    <MenuItem value="Hotels">Hotels</MenuItem>
-                    <MenuItem value="Attractions">Attractions</MenuItem>
+                    <MenuItem value="restaurants">Restaurants</MenuItem>
+                    <MenuItem value="hotels">Hotels</MenuItem>
+                    <MenuItem value="attractions">Attractions</MenuItem>
                 </Select>
             </FormControl>
 

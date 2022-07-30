@@ -8,11 +8,12 @@ export default makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   loading: {
-    height: '500px', display: 'flex', justifyContent: 'center', alignItems: 'center',
+    height: '700px', display: 'flex', justifyContent: 'center', alignItems: 'center',
   },
   container: {
     padding: '25px',
     height: '99vh',
+    userSelect: 'none',
   },
   list: {
     overflow: 'auto',

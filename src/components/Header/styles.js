@@ -9,6 +9,7 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+    userSelect: 'none',
   },
   search: {
     position: 'relative',
