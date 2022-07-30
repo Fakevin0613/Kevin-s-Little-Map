@@ -26,25 +26,28 @@ const App = () => {
     }, []);
 
     useEffect(() => {
-        setIsloading(true)
-        getPlacesData(type, bounds.sw, bounds.ne)
-            .then((data) => {
-                setPlaces(data);
-                setIsloading(false)
-            }
-            )
-    }, [coordinates, bounds, type]);
+        if (bounds.sw && bounds.ne) {
+            setIsloading(true)
+            getPlacesData(type, bounds.sw, bounds.ne)
+                .then((data) => {
+                    setPlaces(data);
+                    setIsloading(false)
+                }
+                )
+        }
+
+    }, [bounds, type, rating]);
 
     return (
         <>
             <CssBaseline />
-            <Header />
+            <Header setCoordinates={setCoordinates} />
             <Grid container spacing={3} style={{ width: '100%' }}>
                 <Grid item xs={12} md={4}>
-                    <List 
-                        places={places} 
-                        childClick={childClick} 
-                        isLoading={isloading} 
+                    <List
+                        places={places}
+                        childClick={childClick}
+                        isLoading={isloading}
                         type={type}
                         rating={rating}
                         setType={setType}
@@ -58,6 +61,7 @@ const App = () => {
                         coordinates={coordinates}
                         places={places}
                         setChildClicked={setChildClick}
+                        rating={rating}
                     />
                 </Grid>
             </Grid>

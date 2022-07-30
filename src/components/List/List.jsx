@@ -23,14 +23,14 @@ const List = ({ places, childClick, isLoading, type, rating, setType, setRating}
             <>
             <div className={classes.topBar}>
             <Typography variant="h4">
-                Where are you heading to?
+                Searching for {type}?
             </Typography>
             <FormControl className={classes.formControl}>
-                <InputLabel>What you are looking for?</InputLabel>
+                <InputLabel>Where are you going?</InputLabel>
                 <Select value={type} onChange={(e) => setType(e.target.value)}>
+                    <MenuItem value="attractions">Attractions</MenuItem>
                     <MenuItem value="restaurants">Restaurants</MenuItem>
                     <MenuItem value="hotels">Hotels</MenuItem>
-                    <MenuItem value="attractions">Attractions</MenuItem>
                 </Select>
             </FormControl>
 
@@ -41,7 +41,7 @@ const List = ({ places, childClick, isLoading, type, rating, setType, setRating}
                     <MenuItem value="2">Rating above 2.0</MenuItem>
                     <MenuItem value="3">Rating above 3.0</MenuItem>
                     <MenuItem value="4">Rating above 4.0</MenuItem>
-                    <MenuItem value="4.5">Rating above 4.5</MenuItem>
+                    <MenuItem value="5">Rating at 5.0</MenuItem>
                 </Select>
             </FormControl>
             </div>
@@ -49,9 +49,10 @@ const List = ({ places, childClick, isLoading, type, rating, setType, setRating}
             <Grid container spacing = {3} className={classes.list}>
                 {places?.map((place ,i) => (
                     place.name? (
-                        <Grid ref = {elRefs[i]} item key = {i} xs={12}>
+                        (place.rating >= rating)? 
+                        (<Grid ref = {elRefs[i]} item key = {i} xs={12}>
                             <PlaceDetails place = {place} selected = {Number(childClick) === i} refProp = {elRefs[i]} />    
-                        </Grid> 
+                        </Grid> ) : null
                     ) : null
                 ))}
             </Grid>
