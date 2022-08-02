@@ -10,7 +10,6 @@ import useStyles from './styles'
 const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked, rating }) => {
     const classes = useStyles();
     const isMobile = useMediaQuery('(max-width:600px)');
-
     return (
         <div className={classes.mapContainer}>
             <GoogleMapReact

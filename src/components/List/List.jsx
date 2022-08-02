@@ -17,36 +17,36 @@ const List = ({ places, childClick, isLoading, type, rating, setType, setRating}
         <div className={classes.container}>
             {isLoading? (
                 <div className={classes.loading}>
-                    <CircularProgress size = "6rem"></CircularProgress>
+                    <CircularProgress size = "6rem" className={classes.rollingBar}></CircularProgress>
                 </div>
             ) : (
             <>
             <div className={classes.topBar}>
-            <Typography variant="h4">
-                Searching for {type}?
+            <Typography variant="h4" className={classes.text}>
+                {type[0].toUpperCase() + type.slice(1)}
             </Typography>
             <FormControl className={classes.formControl}>
-                <InputLabel>Where are you going?</InputLabel>
-                <Select value={type} onChange={(e) => setType(e.target.value)}>
-                    <MenuItem value="attractions">Attractions</MenuItem>
-                    <MenuItem value="restaurants">Restaurants</MenuItem>
-                    <MenuItem value="hotels">Hotels</MenuItem>
+                <InputLabel className={classes.text} >Type</InputLabel>
+                <Select className={classes.text} value={type} onChange={(e) => setType(e.target.value)}>
+                    <MenuItem className={classes.text} value="attractions">Attractions</MenuItem>
+                    <MenuItem className={classes.text} value="restaurants">Restaurants</MenuItem>
+                    <MenuItem className={classes.text} value="hotels">Hotels</MenuItem>
                 </Select>
             </FormControl>
 
             <FormControl className={classes.formControl}>
-                <InputLabel>Rating</InputLabel>
-                <Select value={rating} onChange={(e) => setRating(e.target.value)}>
-                    <MenuItem value="0">All</MenuItem>
-                    <MenuItem value="2">Rating above 2.0</MenuItem>
-                    <MenuItem value="3">Rating above 3.0</MenuItem>
-                    <MenuItem value="4">Rating above 4.0</MenuItem>
-                    <MenuItem value="5">Rating at 5.0</MenuItem>
+                <InputLabel className={classes.text} >Rating</InputLabel>
+                <Select className={classes.text} value={rating} onChange={(e) => setRating(e.target.value)}>
+                    <MenuItem className={classes.text} value="0">All</MenuItem>
+                    <MenuItem className={classes.text} value="2">Rating above 2.0</MenuItem>
+                    <MenuItem className={classes.text} value="3">Rating above 3.0</MenuItem>
+                    <MenuItem className={classes.text} value="4">Rating above 4.0</MenuItem>
+                    <MenuItem className={classes.text} value="5">Rating at 5.0</MenuItem>
                 </Select>
             </FormControl>
             </div>
 
-            <Grid container spacing = {3} className={classes.list}>
+            <Grid container spacing = {2} className={classes.list}>
                 {places?.map((place ,i) => (
                     place.name? (
                         (place.rating >= rating)? 
