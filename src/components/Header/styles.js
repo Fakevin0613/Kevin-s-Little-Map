@@ -2,7 +2,7 @@ import { alpha, makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
   navbar:{
-    backgroundColor: '#A8D0E6',
+    backgroundColor: '#374785',
   },
   title: {
     display: 'none',

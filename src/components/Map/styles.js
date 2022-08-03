@@ -5,7 +5,7 @@ export default makeStyles((isMobile) => ({
     padding: '10px', display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '140px',
   },
   mapContainer: {
-    height: '94vh', width: '100%', padding: '20px',
+    height: '100vh', width: '100%', padding: '20px',
   },
   markerContainer: {
     position: 'absolute', 

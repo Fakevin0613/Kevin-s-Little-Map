@@ -6,6 +6,7 @@ import { getPlacesData } from './api'
 import Header from './components/Header/Header';
 import List from './components/List/List';
 import Map from './components/Map/Map';
+import Footer from './components/Footer/Footer';
 
 
 const App = () => {
@@ -65,6 +66,7 @@ const App = () => {
                     />
                 </Grid>
             </Grid>
+            <Footer></Footer>
         </>
     );
 }

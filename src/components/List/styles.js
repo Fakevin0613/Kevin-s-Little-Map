@@ -13,7 +13,7 @@ export default makeStyles((theme) => ({
   list: {
     marginTop: '20px',
     overflow: 'auto',
-    height: `calc(94vh - 150px)`,
+    height: `calc(100vh - 150px)`,
   },
   rollingBar:{
     color: '#ffffff',
